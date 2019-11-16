@@ -10,8 +10,8 @@ fn main() -> Result<(), MError> {
         Err(_) => Default::default(),
     };
     if xkcd_last != xkcd_new {
-        XkcdResponse::save_to_file(&xkcd_new, "./xkcd.last".into())?;
-        DiscordWebhook::post(xkcd_new.into(),DISCORD_WEBHOOK)?;
+        xkcd_new.save_to_file("./xkcd.last".into())?;
+        DiscordWebhook::post(&xkcd_new.into(),DISCORD_WEBHOOK)?;
     };
     Ok(())
 }

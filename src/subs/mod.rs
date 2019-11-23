@@ -1,5 +1,5 @@
-pub mod discord;
-pub mod xkcd;
+mod discord;
+mod xkcd;
 
 pub use discord::DiscordWebhook;
 pub use xkcd::XkcdResponse;

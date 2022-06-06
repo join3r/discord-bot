@@ -5,7 +5,7 @@ pub use discord::DiscordWebhook;
 use reqwest::blocking::Client;
 pub use xkcd::XkcdResponse;
 
-pub use failure::Error as MError;
+pub use anyhow::Error as MError;
 
 pub trait Webs<T> {
     fn save_to_file(&self, filename: std::path::PathBuf) -> Result<&Self, MError> 

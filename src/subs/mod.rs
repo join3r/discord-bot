@@ -2,6 +2,7 @@ mod discord;
 mod xkcd;
 
 pub use discord::DiscordWebhook;
+use reqwest::blocking::Client;
 pub use xkcd::XkcdResponse;
 
 pub use failure::Error as MError;
@@ -20,12 +21,12 @@ pub trait Webs<T> {
     }
     fn get(url: &str) -> Result<Self, MError> 
     where Self: serde::de::DeserializeOwned {
-        let body = reqwest::Client::new().get(url).send()?.text()?;
+        let body = Client::new().get(url).send()?.text()?;
         Ok(serde_json::from_str(&body)?)
     }
     fn post(&self, url: &str) -> Result<&Self, MError>
     where Self: serde::ser::Serialize {
-        reqwest::Client::new().post(url).json(&self).send()?;
+        Client::new().post(url).json(&self).send()?;
         Ok(self)
     }
 }
